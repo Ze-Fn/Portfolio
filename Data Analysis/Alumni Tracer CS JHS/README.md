@@ -1,5 +1,7 @@
 # Alumni Tracer to Determine Suitable Computer Science Learning Materials
 
+> Work is in progress
+
 ## Overview
 Inspired by a desire to better prepare Junior High School (JHS) students for their future in higher education, this project analyzes alumni data to identify gaps in the current curriculum. By tracing the academic and career paths of Senior High School alumni, it recommends targeted adjustments to JHS Computer Science lesson plans to enhance student readiness for advanced studies and professional opportunities. Using Python and statistical analysis, the study revealed key areas, such as [TBA], that require greater emphasis to align with alumni success in higher education.
 
