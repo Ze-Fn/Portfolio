@@ -7,9 +7,7 @@ Inspired by a desire to better prepare Junior High School (JHS) students for the
 
 
 ## Key Findings
-- **Item Difficulty**: Average 0.65; Items 5-7 too easy (recommend revision).
-- **Discrimination Index**: Items with >0.3 passed; flagged low performers for review.
-- **Impact**: Informed teacher training on assessment design.
+- To ba added
 
 ## Tools & Tech
 - Python (Pandas, SciPy for stats)
