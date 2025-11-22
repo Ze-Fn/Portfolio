@@ -5,7 +5,6 @@ This __personal analysis project__ was driven by my frustration on failing to pa
 
 # Contextual Insight
 In Indonesia, the *Calon Pegawai Negeri Sipil* (CPNS) is a competitive national recruitment process to select candidates for civil service positions in government institutions. The *Seleksi Kompetensi Dasar* (SKD), or Basic Competency Test, is a critical stage of the CPNS, assessing candidates' general knowledge, cognitive abilities, and personality traits through three sections: *Tes Wawasan Kebangsaan* (TWK, civic knowledge), *Tes Intelegensia Umum* (TIU, general intelligence), and *Tes Karakteristik Pribadi* (TKP, personality test). Passing the SKD is essential to advance to further stages of the CPNS selection. This analysis focuses on the 2024 SKD results for candidates with a Master’s degree in English Language Education (*S-2 Pendidikan Bahasa Inggris*), examining their performance and institutional preferences to inform strategic preparation for future CPNS exams.
- 
 
 # Tools and Tech
 - Google Sheets
