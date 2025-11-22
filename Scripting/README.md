@@ -7,6 +7,7 @@ So, I often get burnouts from my job as a part-time teacher. The students in my 
 
 ### The Problem
 I downloaded many modlists including NOLVUS V5, NOLVUS V6, LoreRim, Gate to Sovngarde, and DOMAIN; some of which have same mods one to another. This means, I downloaded identical mods for each of the modlist. This is, of course, a waste of storage. As you can see in the image, the mods I have downloaded have reached thousands and this is only from 2 modlists. Also, for every new modlist I'm downloading, some of the mods from other already downloaded modlists are also required by the other modlist.
+![Screenshot of one of my modlist](https://github.com/Ze-Fn/Portfolio/blob/main/Scripting/Screenshot%202025-11-10%20212218.png)
 In short, below are what I pondered:
 1. _how to know whether mods in modlist X is required by soon-to-be-installed modlist Y so that I don't download the mods that I already have somewhere in my storage (other modlist directory)?_
 2. _how to manage mod files to preserve storage space? I downloaded duplicate mods for some modlists, which then unnecessarily consumed my storage space._
