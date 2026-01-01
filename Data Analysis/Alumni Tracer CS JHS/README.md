@@ -1,43 +1,43 @@
 # Alumni Tracer to Determine Suitable Computer Science Learning Materials
 
-> Work is in progress
+> Excel is done.
+> MySQL ongoing.
+> Python pending.
 
 ## Overview
-Inspired by a desire to better prepare Junior High School (JHS) students for their future in higher education, this project analyzes alumni data to identify gaps in the current curriculum. By tracing the academic and career paths of Senior High School alumni, it recommends targeted adjustments to JHS Computer Science lesson plans to enhance student readiness for advanced studies and professional opportunities. Using Python and statistical analysis, the study revealed key areas, such as [TBA], that require greater emphasis to align with alumni success in higher education.
+Inspired by a desire to better prepare Junior High School (JHS) students for their future in higher education, this project analyzes alumni data to identify gaps in the current curriculum. By tracing the academic and career paths of Senior High School alumni, it recommends targeted adjustments to JHS Computer Science lesson plans to enhance student readiness for advanced studies and professional opportunities. Using exploratory data analysis in Excel and Python, the study revealed key areas that require greater emphasis to align with alumni success in higher education.
 
 
 ## Key Findings
-- To ba added
+- 76% of the students continued to SMK
+- The top 3 faculties are Computer, Automotive, and Economics
 
 ## Tools & Tech
-- Python (numpy, pandas)
-- Jupyter Notebook
-- Tableau
+- Microsoft Excel (data cleaning, analysis, dashboard)
+- MySQL (data cleaning, analysis)
+- Python (TBA)
 
 ## View the Work
-- [Full Analysis Notebook](analysis.ipynb)
-- [Sample Report](report.pdf)
-- [Dataset](data.csv) (anonymized)
+- [in Excel](https://github.com/Ze-Fn/Portfolio/blob/main/Data%20Analysis/Alumni%20Tracer%20CS%20JHS/Excel/Alumni%20Tracer%20CS%20JHS.xlsx)
+- [in MySQL](null) (TBA)
+- [Dataset](https://github.com/Ze-Fn/Portfolio/blob/main/Data%20Analysis/Alumni%20Tracer%20CS%20JHS/raw.csv) (students' names are anonymized)
 
-![Screenshot of key chart](https://raw.githubusercontent.com/yourusername/Portfolio/main/assets/images/item-analysis-cs.png)
-
-## Workflow (simplified)
+## General Workflow
 1. Distribute survey form
 2. Wait for data collection
 3. Import to CSV
 4. Perform data familiarization
 5. Perform data cleaning and data standardization
-6. Perform descriptive statistics
-7. Create visualization based on descriptive statistics
+6. Perform exploratory data analysis
+7. Create visualization in the form of dashboard
 
 # About the Survey Form
 I collect data from alumni through the help of Google Forms. This allows for minimizing the cost to carry out this research. Inside the survey, I inquiried:
 - Full name
 - Gender
-- Year graduated
-- Next education level
+- Graduated Year
+- Senior High School Type
 - Subject field
-
 some of which have a description on how to fill out the survey. To be specific, below are the inquiry along with their respective description in its raw form (Bahasa Indonesia).
 - Nama Lengkap
     - _Data ini hanya akan digunakan untuk menyaring data duplikat_
