@@ -1,0 +1,12 @@
+dec_code;desc
+APS;Resigned
+P/L;Passed CPNS
+P/L-E1;Passed, changed to != Umum, location reallocated
+P/L-E2;Passed, role reassigned
+P/L-E3;Passed, location reallocated, role assigned
+P/L-U1;"Passed, changed to ""Umum"""
+P/L-U3;Passed, location reallocated
+TH;Did not achieved ranking qualification
+TL;Did not attend one of the test
+TMS;Not passed, one requirement not met
+TMS-1;Not passed, did not met one/some/all of SKB requirement(s)
