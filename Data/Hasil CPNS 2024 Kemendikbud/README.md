@@ -52,7 +52,7 @@ I downloaded the data officially from The Ministry of Education and Culture (now
 7. Import the [missing_rows.csv](https://raw.githubusercontent.com/Ze-Fn/Portfolio/refs/heads/main/Data/Hasil%20CPNS%202024%20Kemendikbud/missing_rows.csv) to MySQL database under different table name.
 ---
 
-The [**cleaned script**](https://raw.githubusercontent.com/Ze-Fn/Portfolio/refs/heads/main/Data/Hasil%20CPNS%202024%20Kemendikbud/cleaned_step1.csv) may need further **adjustments** with the columns **data type**.
+The [**cleaned script**](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/attempt1_cleanquery.sql) may need further **adjustments** with the columns **data type**.
 
 The [**dirty script**](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/MySQL/cleaning2_hasil_cpns2024_kemendikbud.sql), on the other hand, needs **no** further **adjustments**, but the script is **very ugly** that I don't recommend running it to query the data (you have been warned :D). It contains my learning journey that materializes my theoretical comprehension of SQL language.
 
