@@ -24,15 +24,47 @@ _TBA_
 
 ---
 ## 2. Methodology
-_TBA_
+In this section, I present the full elaboration of the data that I dealt with. From the fetching process to the visualization outcome.
+
+### 2.1 Data Characteristics
+The test result data is published in a **PDF file** format with more than 16000 pages. Each open job position is separated by a **header** in the next page unless the test takers data for that job position exceed the page capacity to contain the data. The **overflowed data is continued** to the next page without any header. All of the important data are structured in a **table format** but not the headers. There is, however, a **table header for each job position** that encompasses job position code, job position name, location code, location detail, formation type (general, disability, etc.), and education qualification requirements. Below the table header is the **test takers table** boasting number of test taker relative to the job position, test takers' id, full name, birth date, last education qualification, test scores (TWK, TIU, TKP, SKD, SKD (40%), SKB, SKB (60%), total score, and declaration). Pages with no test takers have this data empty.
+
 ### 2.1 Data Collection
 I downloaded the data officially from The Ministry of Education and Culture (now, The Ministry of Primary and Secondary Education) in the format of PDF. The link to the PDF file can be publicly accessed from this [link.](https://casn.kemendikdasmen.go.id/s3/unduh?bn=renada2024&fn=Pengumuman%20Hasil%20Akhir%20Seleksi%20(Kelulusan)%20Pasca%20UD2%20CPNS%202024_Lampiran%20I.pdf) 
 
-### 2.2 Export, Load, Transform
-1. Convert PDF to CSV
+### 2.2 Data Cleaning
+1. Convert PDF to CSV using this [Python script.](https://github.com/Ze-Fn/Portfolio/raw/refs/heads/main/Data%20Analysis/Hasil%20CPNS%202024%20Kemendikbud/extract_tables_pdfplumber3.py)<sup>1</sup>
+2. Import to MySQL Workbench through `Table Data Import Wizard ...`.
+3. Familiarize with the dataset.
 
+        There are several issues with the imported data.
+        1. Inconventional column names
+        2. Open positions with no candidate are not defined
+        3. Unimported rows from source table
+        4. Missing important column: `tiu`, `tkp`
 
-### 2.3 Data Cleaning
-_TBA_
-### 2.4 Data Analysis
-_TBA_
+4. Rename all column to a more appropriate name.
+5. Define open positions with no candidate based on COUNT(page_number).
+6. Import rows from source PDF with different Python script that successfully extract the missing rows.
+    * Extract the PDF file using a different script ([extract_missing_rows.py]()).
+    * Save to CSV ([extracted_missing_rows.csv]()).
+    * Clean the CSV using bash script ([omit_newlines1.sh]()) to eliminate inline `\n` which can cause massive mess in the import process ([missing_rows.csv]()).
+7. Import the [missing_rows.csv]() to MySQL database under different table name.
+---
+
+The [**cleaned script**]() may need further **adjustments** with the columns **data type**.
+
+The [**dirty script**](), on the other hand, needs **no** further **adjustments**, but the script is **very ugly** that I don't recommend running it to query the data.
+
+Hereafter, I am using the cleaned version as my main data source.
+
+### 2.3 Data Analysis
+1. Univariate data analysis:
+    * Measure of Central Tendency
+    * Measure of Dispersion
+    * Frequency Distribution
+2. Bivariate data analysis.
+    * Pearson Correlation
+        * `birthdate` vs `total_score`
+        * _TBA_
+    * TBA

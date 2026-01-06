@@ -2,7 +2,7 @@ import pdfplumber
 import pandas as pd
 
 file_path = "HasilCPNS2024KemendikbudLampiran1.pdf"
-output_csv = "extracted_tables_all_pages.csv"
+output_csv = "extracted_missing_rows.csv"
 
 all_tables = []
 

@@ -862,3 +862,200 @@ SET loc_code =
 SELECT jf_code, page_number
 FROM cleaning5
 GROUP BY page_number, jf_code;
+
+SELECT * FROM cleaning5;
+
+CREATE TABLE fill1 LIKE cleaning5;
+INSERT INTO fill1
+SELECT * FROM cleaning5;
+
+SELECT * FROM fill1;
+ALTER TABLE fill1
+	DROP COLUMN relative_num,
+    DROP COLUMN id,
+    DROP COLUMN full_name,
+    DROP COLUMN birthdate, 
+    DROP COLUMN last_edu,
+    DROP COLUMN edu_level,
+    DROP COLUMN gpa_4scale,
+    DROP COLUMN twk,
+    DROP COLUMN tiu,
+    DROP COLUMN tkp,
+    DROP COLUMN skd_40,
+    DROP COLUMN skb,
+    DROP COLUMN skb_60,
+    DROP COLUMN final_score,
+    DROP COLUMN keterangan;
+    
+SELECT DISTINCT page_number FROM fill1
+WHERE jf_code IS NULL;
+
+CREATE TABLE fill1_ref LIKE fill1;
+SELECT * FROM fill1_ref;
+ALTER TABLE fill1_ref DROP COLUMN skd;
+
+SELECT 
+    COALESCE(t1.jf_code, t2.jf_code) AS jf_code_filled,
+	COALESCE(t1.jabatan_desc, t2.jabatan_desc) AS jabatan_desc_filled,
+    COALESCE(t1.loc_code, t2.loc_code) AS loc_code_filled,
+    COALESCE(t1.type_formation_code, t2.type_formation_code) AS type_formation_code_filled,
+    COALESCE(t1.type_formation, t2.type_formation) AS type_formation_filled,
+    COALESCE(t1.pendidikan_formasi, t2.pendidikan_formasi) AS pendidikan_formasi_filled,
+    t1.page_number
+FROM fill1 AS t1
+LEFT JOIN fill1 AS t2
+	ON t2.page_number = t1.page_number - 1
+    AND t2.jf_code IS NOT NULL
+ORDER BY t1.page_number;
+
+UPDATE fill1 AS t1
+JOIN fill1 AS t2
+	ON t2.page_number = t1.page_number - 1
+    AND t2.page_number IS NOT NULL
+SET
+	t1.jf_code = t2.jf_code,
+    t1.jabatan_desc = t2.jabatan_desc,
+    t1.loc_code = t2.loc_code,
+    t1.type_formation_code = t2.type_formation_code,
+    t1.type_formation = t2.type_formation,
+    t1.pendidikan_formasi = t2.pendidikan_formasi
+WHERE t1.jf_code IS NULL;
+
+SELECT * FROM fill1;
+SELECT COUNT(DISTINCT page_number) FROM fill1 WHERE jf_code IS NULL;
+SELECT DISTINCT page_number FROM fill1 WHERE jf_code IS NULL;
+SELECT * FROM cleaning5 WHERE page_number LIKE "9138" ORDER BY page_number;
+
+/* There are some rows that are accidentally deleted in the several previous operations.
+Now beginning to retrieve data from backup based on `page_number`.
+Open positions having some of it rows deleted are of rows with page_number LIKE:
+1637 - 1
+7497 - 1
+8038 - 1
+8560 - 1
+9139 - 1
+9832 - 1
+10027 - 1
+
+
+Update: I have tried importing the table but it seemed that the said pages did not sucessfully imported.
+Upon investigating on the corresponding CSV file in a text editor, there are in fact exist the said pages.
+
+*/
+
+ALTER TABLE fill2 ADD COLUMN `count` TEXT;
+INSERT INTO fill2
+SELECT jf_code, jabatan_desc, loc_code, type_formation_code, type_formation, pendidikan_formasi, page_number, COUNT(page_number) AS count FROM fill1
+GROUP BY jf_code, jabatan_desc, loc_code, type_formation_code, type_formation, pendidikan_formasi, page_number;
+
+SELECT * FROM fill2;
+ALTER TABLE fill2 DROP COLUMN `count`;
+
+ALTER TABLE fill1 DROP COLUMN skd;
+
+CREATE TABLE fill2 LIKE fill1;
+INSERT INTO fill2
+SELECT  DISTINCT(*) FROM fill1;
+
+CREATE TABLE backup1_cleaning5 LIKE cleaning5;
+INSERT INTO backup1_cleaning5
+SELECT * FROM cleaning5;
+
+UPDATE cleaning5 t1
+JOIN fill2 t2 ON t1.page_number = t2.page_number
+SET 
+	t1.jf_code = t2.jf_code,
+    t1.jabatan_desc = t2.jabatan_desc,
+    t1.loc_code = t2.loc_code,
+    t1.type_formation_code = t2.type_formation_code,
+    t1.type_formation = t2.type_formation,
+    t1.pendidikan_formasi = t2.pendidikan_formasi
+WHERE t1.jf_code IS NULL;
+
+SELECT * FROM cleaning5;
+
+SELECT * FROM cleaning6;
+
+/*
+Created `job_position` table to contain jf_code and job_desc.
+Later on, `jf_code` in cleaning6 will be renamed to `jp_code`.
+In addition, `jabatan_desc` will also be renamed to `position`.
+*/
+
+SELECT COUNT(jf_code), jabatan_desc, jf_code FROM cleaning6
+GROUP BY jabatan_desc, jf_code
+ORDER BY jf_code; # Query result exported to CSV then re-import
+
+SELECT * FROM cleaning6
+WHERE page_number LIKE "1635";
+
+SELECT COUNT(type_formation), type_formation_code, type_formation
+FROM cleaning6
+GROUP BY type_formation_code, type_formation
+ORDER BY type_formation_code;
+
+INSERT INTO fill1 (
+    jf_code, 
+    jabatan_desc, 
+    loc_code, 
+    type_formation_code, 
+    type_formation, 
+    pendidikan_formasi, 
+    page_number
+) VALUES 
+('JF0000908', 'DOSEN ASISTEN AHLI', '30102210', '1', 'Umum', 'Pendidikan S-2 ILMU BIOMEDIS 5', '7496'),
+('JF0000908', 'DOSEN ASISTEN AHLI', '30100073', '1', 'Umum', 'Pendidikan S-2 EKONOMI SYARIAH 3', '1636'),
+('JF0000908', 'DOSEN ASISTEN AHLI', '30102713', '1', 'Umum', 'Pendidikan S-2 EPIDEMIOLOGI/ S-2 KESEHATAN MASYARAKAT 4', '8037'),
+('JF0000908', 'DOSEN ASISTEN AHLI', '30102976', '1', 'Umum', 'Pendidikan S-2 ILMU MANAJEMEN/ S-2 MANAJEMEN/ S-2 MANAJEMEN SUMBER DAYA MANUSIA 5', '8559'),
+('JF0000908', 'DOSEN ASISTEN AHLI', '30103191', '1', 'Umum', 'Pendidikan S-2 ILMU KOMUNIKASI 8', '9138'),
+('JF0000908', 'DOSEN ASISTEN AHLI', '30103456', '1', 'Umum', 'Pendidikan S-2 FARMASI/ S-2 ILMU FARMASI 5', '9831'),
+('JF0000908', 'DOSEN ASISTEN AHLI', '30103567', '1', 'Umum', 'Pendidikan S-2 MANAJEMEN 5', '10026');
+
+SELECT * FROM fill1 WHERE jf_code IS NULL;
+
+UPDATE fill1 AS t1
+JOIN fill1 AS t2
+	ON t2.page_number = t1.page_number - 1
+    AND t2.page_number IS NOT NULL
+SET
+	t1.jf_code = t2.jf_code,
+    t1.jabatan_desc = t2.jabatan_desc,
+    t1.loc_code = t2.loc_code,
+    t1.type_formation_code = t2.type_formation_code,
+    t1.type_formation = t2.type_formation,
+    t1.pendidikan_formasi = t2.pendidikan_formasi
+WHERE t1.jf_code IS NULL;
+
+UPDATE union_cleaning7 t1
+JOIN fill1 t2 ON t1.page_number = t2.page_number
+SET 
+	t1.jf_code = t2.jf_code,
+    t1.jabatan_desc = t2.jabatan_desc,
+    t1.loc_code = t2.loc_code,
+    t1.type_formation_code = t2.type_formation_code,
+    t1.type_formation = t2.type_formation,
+    t1.pendidikan_formasi = t2.pendidikan_formasi
+WHERE t1.jf_code IS NULL;
+
+SELECT * FROM union_cleaning7 WHERE jf_code IS NULL;
+
+SELECT * FROM union_cleaning7;
+
+UPDATE union_cleaning7
+SET birthdate = REPLACE(birthdate, 'Januari', 'January'),
+    birthdate = REPLACE(birthdate, 'Februari', 'February'),
+    birthdate = REPLACE(birthdate, 'Maret', 'March'),
+    birthdate = REPLACE(birthdate, 'Mei', 'May'),
+    birthdate = REPLACE(birthdate, 'Juni', 'June'),
+    birthdate = REPLACE(birthdate, 'Juli', 'July'),
+    birthdate = REPLACE(birthdate, 'Agustus', 'August'),
+    birthdate = REPLACE(birthdate, 'Oktober', 'October'),
+    birthdate = REPLACE(birthdate, 'Desember', 'December');
+    
+UPDATE union_cleaning7
+SET birthdate = STR_TO_DATE(birthdate, '%d %M %Y');
+
+SELECT * FROM union_cleaning7;
+
+SELECT DISTINCT keterangan FROM union_cleaning7 ORDER BY keterangan;
+SELECT DISTINCT type_formation_code, type_formation, COUNT(type_formation) FROM union_cleaning7 GROUP BY type_formation_code, type_formation ORDER BY type_formation_code;
