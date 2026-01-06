@@ -33,28 +33,28 @@ The test result data is published in a **PDF file** format with more than 16000 
 I downloaded the data officially from The Ministry of Education and Culture (now, The Ministry of Primary and Secondary Education) in the format of PDF. The link to the PDF file can be publicly accessed from this [link.](https://casn.kemendikdasmen.go.id/s3/unduh?bn=renada2024&fn=Pengumuman%20Hasil%20Akhir%20Seleksi%20(Kelulusan)%20Pasca%20UD2%20CPNS%202024_Lampiran%20I.pdf) 
 
 ### 2.2 Data Cleaning
-1. Convert PDF to CSV using this [Python script.](https://github.com/Ze-Fn/Portfolio/raw/refs/heads/main/Data%20Analysis/Hasil%20CPNS%202024%20Kemendikbud/extract_tables_pdfplumber3.py)<sup>1</sup>
+1. Convert PDF to CSV using a Python script [extract_tables_pdfplumber3.py](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/extract_tables_pdfplumber3.py)
 2. Import to MySQL Workbench through `Table Data Import Wizard ...`.
 3. Familiarize with the dataset.
 
-        There are several issues with the imported data.
-        1. Inconventional column names
-        2. Open positions with no candidate are not defined
-        3. Unimported rows from source table
-        4. Missing important column: `tiu`, `tkp`
+> There are several issues with the imported data.
+> 1. Inconventional column names
+> 2. Open positions with no candidate are not defined
+> 3. Unimported rows from source table
+> 4. Missing important column: `tiu`, `tkp`
 
 4. Rename all column to a more appropriate name.
 5. Define open positions with no candidate based on COUNT(page_number).
 6. Import rows from source PDF with different Python script that successfully extract the missing rows.
     * Extract the PDF file using a different script ([extract_missing_rows.py]()).
-    * Save to CSV ([extracted_missing_rows.csv]()).
-    * Clean the CSV using bash script ([omit_newlines1.sh]()) to eliminate inline `\n` which can cause massive mess in the import process ([missing_rows.csv]()).
-7. Import the [missing_rows.csv]() to MySQL database under different table name.
+    * Save to CSV ([extracted_missing_rows.csv](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/extract_missing_rows.py)).
+    * Clean the CSV using bash script ([omit_newlines1.sh](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/omit_newlines1.sh)) to eliminate inline `\n` which can cause massive mess in the import process ([missing_rows.csv]()).
+7. Import the [missing_rows.csv](https://raw.githubusercontent.com/Ze-Fn/Portfolio/refs/heads/main/Data/Hasil%20CPNS%202024%20Kemendikbud/missing_rows.csv) to MySQL database under different table name.
 ---
 
-The [**cleaned script**]() may need further **adjustments** with the columns **data type**.
+The [**cleaned script**](https://raw.githubusercontent.com/Ze-Fn/Portfolio/refs/heads/main/Data/Hasil%20CPNS%202024%20Kemendikbud/cleaned_step1.csv) may need further **adjustments** with the columns **data type**.
 
-The [**dirty script**](), on the other hand, needs **no** further **adjustments**, but the script is **very ugly** that I don't recommend running it to query the data.
+The [**dirty script**](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/MySQL/cleaning2_hasil_cpns2024_kemendikbud.sql), on the other hand, needs **no** further **adjustments**, but the script is **very ugly** that I don't recommend running it to query the data (you have been warned :D). It contains my learning journey that materializes my theoretical comprehension of SQL language.
 
 Hereafter, I am using the cleaned version as my main data source.
 
