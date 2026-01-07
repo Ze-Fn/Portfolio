@@ -21,7 +21,6 @@ SELECT * FROM attempt1_cleanquery;
 3. Unimported rows from source table
 4. Missing important column: `tiu`, `tkp`
 
-
 Proposed actions (respectively):
 1. Rename all column to a more appropriate name
 2. Define open positions with no candidate based on COUNT(page_number)
@@ -49,103 +48,84 @@ ALTER TABLE attempt1_cleanquery
     RENAME COLUMN `keterangan` TO decl_code;
 
 /* 2. Define open positions with no candidate based on COUNT(page_number) */
-SELECT * FROM attempt1_cleanquery lt
-RIGHT JOIN (SELECT page_number
-		FROM attempt1_cleanquery
-        GROUP BY page_number
-        HAVING COUNT(page_number) = 3) rt
-	ON lt.page_number = rt.page_number;		# Check CTE
-
-WITH no_candidate AS(
+WITH no_candidate AS(               -- CTE for open positions with no candidate
 	SELECT page_number
 	FROM attempt1_cleanquery
     GROUP BY page_number
-    HAVING COUNT(page_number) = 3		# Detects open positions with no candidate
+    HAVING COUNT(page_number) = 3   
 )
-UPDATE attempt1_cleanquery lt
+UPDATE attempt1_cleanquery lt       -- Updates the table
 LEFT JOIN no_candidate rt
 	ON lt.page_number = rt.page_number
 SET 
-	relative_num = 
-		CASE
+	relative_num = CASE
 			WHEN relative_num LIKE "(1)" THEN "No Candidate"
 			WHEN relative_num LIKE "" THEN "Omit"
 			ELSE relative_num
-		END,
-    id = 
-		CASE 
+		    END,
+    id = CASE 
 			WHEN id LIKE "(2)" THEN NULL
             ELSE id
-        END,
-    full_name = 
-        CASE
+            END,
+    full_name = CASE
             WHEN full_name LIKE "(3)" THEN NULL
             ELSE full_name
-        END,
-    birthdate = 
-        CASE
+            END,
+    birthdate = CASE
             WHEN birthdate LIKE "(4)" THEN NULL
             ELSE birthdate
-        END,
-    last_edu = 
-        CASE
+            END,
+    last_edu = CASE
             WHEN last_edu LIKE "(5)" THEN NULL
             ELSE last_edu
-        END,
-    gpa = 
-        CASE
+            END,
+    gpa = CASE
             WHEN gpa LIKE "(6)" THEN NULL
             ELSE gpa
-        END,
-    twk = 
-        CASE
+            END,
+    twk = CASE
             WHEN twk LIKE "(7)" OR twk LIKE "TWK" THEN NULL
             ELSE twk
-        END,
-    skd = 
-        CASE
+            END,
+    skd = CASE
             WHEN skd LIKE "(%" THEN NULL
             ELSE skd
-        END,
-    skd40 = 
-        CASE
+            END,
+    skd40 = CASE
             WHEN skd40 LIKE "(%" THEN NULL
             ELSE skd40
-        END,
-    skb = 
-        CASE
+            END,
+    skb = CASE
             WHEN skb LIKE "(%" THEN NULL
             ELSE skb
-        END,
-    skb60 = 
-        CASE
+            END,
+    skb60 = CASE
             WHEN skb60 LIKE "(%" THEN NULL
             ELSE skb60
-        END,
-    final_score = 
-        CASE
+            END,
+    final_score = CASE
             WHEN final_score LIKE "(%" THEN NULL
             ELSE final_score
-        END,
-    decl_code = 
-        CASE
+            END,
+    decl_code = CASE
             WHEN decl_code LIKE "(%" THEN NULL
             ELSE decl_code
-        END 	
-WHERE lt.page_number = rt.page_number;	-- Updates the table
+            END
+WHERE lt.page_number = rt.page_number;
 
 /* 3. Import rows from source PDF with different Python script that successfully extract the missing rows */
-WITH missing_rows_cte AS
-(SELECT `0`,`1`,`2`,`3`,`4`,`5`,`6`,`7`,`8`,`9`,`10`,`11`,`12`,`13`,`14` FROM missing_rows
-WHERE 
-	`__page__` LIKE "1636" OR
-	`__page__` LIKE "7496" OR
-    `__page__` LIKE "8037" OR
-    `__page__` LIKE "8559" OR
-    `__page__` LIKE "9138" OR
-    `__page__` LIKE "9831" OR
-    `__page__` LIKE "10026")
-SELECT * FROM missing_rows_cte
+WITH missing_rows_cte AS(       -- CTE for missing rows
+    SELECT `0`,`1`,`2`,`3`,`4`,`5`,`6`,`7`,`8`,`9`,`10`,`11`,`12`,`13`,`14` 
+    FROM missing_rows
+    WHERE 
+        `__page__` LIKE "1636" OR
+        `__page__` LIKE "7496" OR
+        `__page__` LIKE "8037" OR
+        `__page__` LIKE "8559" OR
+        `__page__` LIKE "9138" OR
+        `__page__` LIKE "9831" OR
+        `__page__` LIKE "10026")
+SELECT * FROM missing_rows_cte  -- Main query to see the missing rows
 WHERE 
 	`0` NOT LIKE "" AND
     `0` NOT LIKE "P%" AND
@@ -215,26 +195,52 @@ VALUES
 ('8', '24301020110006586', 'USMAN HADI YULIANTO', '31 Oktober 1997', 'S-2 MANAJEMEN', '3.63', '85', '145', '179', '409', '29.746', '61.4', '36.84', '66.586', 'TL',NULL,NULL,NULL,NULL,10026);
 
 /* 4. Import tables from source PDF with different Python script that successfully extract either `tiu` or `tkp` or both */
-WITH cleant AS
-(SELECT relative_num, id, full_name, birthdate, last_edu, gpa, twk, skd, skd40, skb, skb60, final_score, decl_code, 
-	SUBSTRING(jabatan_formasi, (LOCATE(": ", jabatan_formasi) + 2), ((LENGTH(jabatan_formasi) - ((LOCATE(": ", jabatan_formasi) + 2) + (LOCATE("- ", REVERSE(jabatan_formasi))))))) AS jp_code,
-	SUBSTRING(jabatan_formasi, (LOCATE("- ", jabatan_formasi) + 2), (LENGTH(jabatan_formasi) - (((LOCATE("- ", jabatan_formasi) + 1) + LOCATE(" ", REVERSE(jabatan_formasi)))))) AS job_position,
-	SUBSTRING(lokasi_formasi, 18, 8) AS loc_code, 
-    SUBSTRING(jenis_formasi, (LOCATE(": ", jenis_formasi) + 2), 1) AS type_code,
-    SUBSTRING(jenis_formasi, (LOCATE("- ", jenis_formasi) + 2), (LENGTH(jenis_formasi) - (LOCATE("- ", jenis_formasi) + 2))) AS type_formation,
-    page_number
-FROM attempt1_cleanquery
-WHERE 
-	relative_num NOT LIKE "" AND
-    relative_num NOT LIKE "(1)" AND
-    relative_num NOT LIKE "Omit"
-ORDER BY page_number),
-tiutkp AS(
-SELECT `7` AS tiu, `8` AS tkp, `1` AS id, `__page__`  FROM missing_rows),
-no_candidate AS(
-SELECT * FROM cleant
-WHERE relative_num LIKE "No Candidate")
-SELECT * FROM cleant lt
+WITH cleant AS(     -- Query table with cleaned columns plus extracted columns
+    SELECT relative_num, id, 
+    (REPLACE(REPLACE(full_name, '\n', ''), '\r', '')) AS full_name, 
+    (REPLACE(REPLACE(birthdate, '\n', ''), '\r', '')) AS birthdate, 
+    (REPLACE(REPLACE(last_edu, '\n', ''), '\r', '')) AS last_edu,
+    gpa, twk, skd, skd40, skb, skb60, final_score, decl_code, 
+        SUBSTRING(
+            jabatan_formasi, 
+            (LOCATE(": ", jabatan_formasi) + 2), 
+            ((LENGTH(jabatan_formasi) - ((LOCATE(": ", jabatan_formasi) + 2) + (LOCATE("- ", REVERSE(jabatan_formasi))))))) AS jp_code,
+        SUBSTRING(
+            jabatan_formasi, 
+            (LOCATE("- ", jabatan_formasi) + 2), 
+            (LENGTH(jabatan_formasi) - (((LOCATE("- ", jabatan_formasi) + 1) + LOCATE(" ", REVERSE(jabatan_formasi)))))) AS job_position,
+        SUBSTRING(
+            lokasi_formasi, 
+            18, 
+            8) AS loc_code, 
+        SUBSTRING(
+            jenis_formasi, 
+            (LOCATE(": ", jenis_formasi) + 2), 
+            1) AS type_code,
+        SUBSTRING(
+            jenis_formasi, 
+            (LOCATE("- ", jenis_formasi) + 2), 
+            (LENGTH(jenis_formasi) - (LOCATE("- ", jenis_formasi) + 2))) AS type_formation,
+        page_number
+    FROM attempt1_cleanquery
+    WHERE 
+        relative_num NOT LIKE "" AND
+        relative_num NOT LIKE "(1)" AND
+        relative_num NOT LIKE "Omit"
+    ORDER BY page_number),
+tiutkp AS(          -- Query table with extracted tiu and tkp columns  
+    SELECT 
+        `7` AS tiu, 
+        `8` AS tkp, 
+        `1` AS id, 
+        `__page__`  
+    FROM missing_rows),
+no_candidate AS(    -- Query table for open positions with no candidate
+    SELECT * 
+    FROM cleant
+    WHERE relative_num LIKE "No Candidate")
+
+SELECT * FROM cleant lt -- Main query combining all tables
 INNER JOIN tiutkp rt
 	ON lt.id = rt.id
 UNION 
@@ -246,12 +252,14 @@ SELECT lt2.relative_num, lt2.id,
 		WHEN rt2.tiu LIKE "" THEN NULL
         WHEN rt2.tiu LIKE "TIU" THEN NULL
         WHEN rt2.tiu LIKE "(%" THEN NULL
-        ELSE rt2.tiu END) AS tiu,
+        ELSE rt2.tiu 
+        END) AS tiu,
 	(rt2.tkp = CASE
 		WHEN rt2.tkp LIKE "" THEN NULL
         WHEN rt2.tkp LIKE "TKP" THEN NULL
         WHEN rt2.tkp LIKE "(%" THEN NULL
-        ELSE rt2.tkp END) AS tkp,
+        ELSE rt2.tkp 
+        END) AS tkp,
 	(rt2.id = CASE
 		WHEN rt2.id LIKE "No%" THEN NULL
         WHEN rt2.id LIKE "" THEN NULL
