@@ -1,23 +1,31 @@
-# Project Overview
-## Summary
+# 📊 Project Overview
+## 🧾 Summary
 * __Source file:__ [Pengumuman Hasil Akhir Seleksi (Kelulusan) Pasca UD2 CPNS 2024 - Lampiran I](https://casn.kemendikdasmen.go.id/s3/unduh?bn=renada2024&fn=Pengumuman%20Hasil%20Akhir%20Seleksi%20(Kelulusan)%20Pasca%20UD2%20CPNS%202024_Lampiran%20I.pdf)
 
 * __Technologies:__
-    * Python
-    * Google Sheets _(ongoing)_
-    * MySQL _(ongoing)_
-    * Jupyter Notebook _(pending cleaning)_
-    * Tableau _(pending cleaning)_
-    * Power BI _(pending cleaning)_
+
+
+
+| Technology       | Primary Use                                                 | Status           |
+|------------------|-------------------------------------------------------------|------------------|
+| Python           | Data extraction, cleaning, analysis, scripting              | Pending ⏳      |
+| Google Sheets    | Analysis and dashboard from MySQL data aggregation          | In Progress 🟡  |
+| Microsoft Excel  | Analysis and dashboard from MySQL data aggregation          | In Progress 🟡  |
+| MySQL            | Data storage, transformation, SQL analytics                 | Done 🟢         |
+| Jupyter Notebook | Exploratory data analysis and prototyping                   | Pending ⏳      |
+| Tableau          | Data visualization and dashboarding                         | Pending ⏳      |
+| Power BI         | Business intelligence reporting                             | Pending ⏳      |
+
 
 * __Results:__
 _TBA_
 
 * __Implications:__
+_TBA_
 
 ---
 
-## 1 Introduction
+## 1. Introduction
 ### 1.1 Backgrounds
 _TBA_
 
@@ -50,11 +58,11 @@ I downloaded the data officially from The Ministry of Education and Culture (now
 6. Import rows from source PDF with different Python script that successfully extract the missing rows.
     * Extract the PDF file using a different script ([extract_missing_rows.py]()).
     * Save to CSV ([extracted_missing_rows.csv](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/extract_missing_rows.py)).
-    * Clean the CSV using bash script ([omit_newlines1.sh](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/omit_newlines1.sh)) to eliminate inline `\n` which can cause massive mess in the import process ([missing_rows.csv]()).
+    * Clean the CSV using bash script ([omit_newlines1.sh](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/omit_newlines1.sh)) to eliminate inline `\n` in [missing_rows.csv](https://raw.githubusercontent.com/Ze-Fn/Portfolio/refs/heads/main/Data/Hasil%20CPNS%202024%20Kemendikbud/missing_rows.csv) _(which can cause massive mess in the import process)_ and replaces it with a blank spaces `" "`.
 7. Import the [missing_rows.csv](https://raw.githubusercontent.com/Ze-Fn/Portfolio/refs/heads/main/Data/Hasil%20CPNS%202024%20Kemendikbud/missing_rows.csv) to MySQL database under different table name.
 ---
 
-The [**cleaned script**](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/attempt1_cleanquery.sql) may need further **adjustments** with the columns **data type**.
+The [**cleaned script**](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/attempt1_cleanquery.sql).
 
 The [**dirty script**](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/MySQL/cleaning2_hasil_cpns2024_kemendikbud.sql), on the other hand, needs **no** further **adjustments**, but the script is **very ugly** that I don't recommend running it to query the data (you have been warned :D). It contains my learning journey that materializes my theoretical comprehension of SQL language.
 
@@ -65,6 +73,9 @@ Hereafter, I am using the cleaned version as my main data source.
     * Measure of Central Tendency
     * Measure of Dispersion
     * Frequency Distribution
+
+    > Available in [SQL script](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/attempt1_cleanquery.sql), more to come ...
+
 2. Bivariate data analysis.
     * Pearson Correlation
         * `birthdate` vs `total_score`
