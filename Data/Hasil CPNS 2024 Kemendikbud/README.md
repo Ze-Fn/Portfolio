@@ -25,7 +25,7 @@ _TBA_
 
 ---
 
-## 1. Introduction
+## 🧩 1. Introduction
 ### 1.1 Backgrounds
 _TBA_
 
@@ -33,7 +33,7 @@ _TBA_
 1. 
 
 ---
-## 2. Methodology
+## 🔬 2. Methodology
 In this section, I present the full elaboration of the data that I dealt with. From the fetching process to the visualization outcome.
 
 ### 2.1 Data Characteristics
