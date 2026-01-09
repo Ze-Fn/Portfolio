@@ -16,6 +16,6 @@ if [ ! -f "$INPUT_FILE" ]; then
 fi
 
 # Use tr to delete the newline character
-tr -d '\n' < "$INPUT_FILE" > "$OUTPUT_FILE"
+tr '\n' ' ' < "$INPUT_FILE" > "$OUTPUT_FILE"
 
 echo "Success: Newlines removed. Output saved to '$OUTPUT_FILE'."
