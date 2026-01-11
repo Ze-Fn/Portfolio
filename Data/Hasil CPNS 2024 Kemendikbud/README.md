@@ -5,16 +5,16 @@
 * __Technologies:__
 
 
-| Technology | Primary Use | Status |
-|-----------|-------------|--------|
-| ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white) | Data extraction, cleaning, analysis, scripting | ![Pending](https://img.shields.io/badge/Status-Pending-lightgrey) |
-| ![Google Sheets](https://img.shields.io/badge/Google%20Sheets-34A853?logo=googlesheets&logoColor=white) | Analysis and dashboard from MySQL data aggregation | ![In Progress](https://img.shields.io/badge/Status-In%20Progress-yellow) |
-| ![Microsoft Excel](https://img.shields.io/badge/Microsoft%20Excel-217346?logo=microsoftexcel&logoColor=white) | Analysis and dashboard from MySQL data aggregation | ![In Progress](https://img.shields.io/badge/Status-In%20Progress-yellow) |
-| ![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white) | Data storage, transformation, SQL analytics | ![Done](https://img.shields.io/badge/Status-Done-brightgreen) |
-| ![Jupyter Notebook](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white) | Exploratory data analysis and prototyping | ![Pending](https://img.shields.io/badge/Status-Pending-lightgrey) |
-| ![Google Colab](https://img.shields.io/badge/Google%20Colab-F9AB00?logo=googlecolab&logoColor=black) | Exploratory data analysis and prototyping | ![Pending](https://img.shields.io/badge/Status-Pending-lightgrey) |
-| ![Tableau](https://img.shields.io/badge/Tableau-E97627?logo=tableau&logoColor=white) | Data visualization and dashboarding | ![Pending](https://img.shields.io/badge/Status-Pending-lightgrey) |
-| ![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black) | Business intelligence reporting | ![Pending](https://img.shields.io/badge/Status-Pending-lightgrey) |
+| Technology | Primary Use | Status | Quick Link |
+|-----------|-------------|--------|-------------|
+| ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white) | Data extraction, cleaning, analysis, scripting | ![Pending](https://img.shields.io/badge/Status-Pending-lightgrey) | _TBA_ |
+| ![Google Sheets](https://img.shields.io/badge/Google%20Sheets-34A853?logo=googlesheets&logoColor=white) | Analysis and dashboard from MySQL data aggregation | ![In Progress](https://img.shields.io/badge/Status-In%20Progress-yellow) | _TBA_ |
+| ![Microsoft Excel](https://img.shields.io/badge/Microsoft%20Excel-217346?logo=microsoftexcel&logoColor=white) | Analysis and dashboard from MySQL data aggregation | ![In Progress](https://img.shields.io/badge/Status-In%20Progress-yellow) | _TBA_ |
+| ![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white) | Data storage, transformation, SQL analytics | ![Done](https://img.shields.io/badge/Status-Done-brightgreen) | [⬇️ Download CSV](https://raw.githubusercontent.com/Ze-Fn/Portfolio/refs/heads/main/Data/Hasil%20CPNS%202024%20Kemendikbud/cleaned_v2.csv)
+| ![Jupyter Notebook](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white) | Exploratory data analysis and prototyping | ![Pending](https://img.shields.io/badge/Status-Pending-lightgrey) | _TBA_ |
+| ![Google Colab](https://img.shields.io/badge/Google%20Colab-F9AB00?logo=googlecolab&logoColor=black) | Exploratory data analysis and prototyping | ![Pending](https://img.shields.io/badge/Status-Pending-lightgrey) | _TBA_ |
+| ![Tableau](https://img.shields.io/badge/Tableau-E97627?logo=tableau&logoColor=white) | Data visualization and dashboarding | ![Pending](https://img.shields.io/badge/Status-Pending-lightgrey) | _TBA_ |
+| ![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black) | Business intelligence reporting | ![Pending](https://img.shields.io/badge/Status-Pending-lightgrey) | _TBA_ |
 
 
 
