@@ -5,17 +5,17 @@
 * __Technologies:__
 
 
-
 | Technology       | Primary Use                                                 | Status           |
 |------------------|-------------------------------------------------------------|------------------|
-| Python           | Data extraction, cleaning, analysis, scripting              | Pending ⏳      |
-| Google Sheets    | Analysis and dashboard from MySQL data aggregation          | In Progress 🟡  |
-| Microsoft Excel  | Analysis and dashboard from MySQL data aggregation          | In Progress 🟡  |
-| MySQL            | Data storage, transformation, SQL analytics                 | Done 🟢         |
-| Jupyter Notebook | Exploratory data analysis and prototyping                   | Pending ⏳      |
-| Tableau          | Data visualization and dashboarding                         | Pending ⏳      |
-| Power BI         | Business intelligence reporting                             | Pending ⏳      |
+| Python           | Data extraction, cleaning, analysis, scripting              | Pending ⏳       |
+| Google Sheets    | Analysis and dashboard from MySQL data aggregation          | In Progress 🟡   |
+| Microsoft Excel  | Analysis and dashboard from MySQL data aggregation          | In Progress 🟡   |
+| MySQL            | Data storage, transformation, SQL analytics                 | In Progress 🟡   |
+| Jupyter Notebook | Exploratory data analysis and prototyping                   | Pending ⏳       |
+| Tableau          | Data visualization and dashboarding                         | Pending ⏳       |
+| Power BI         | Business intelligence reporting                             | Pending ⏳       |
 
+> **CURRENT PROGRESS:** Extracting missing values (loc_detail) using [extract_string.py]()
 
 * __Results:__
 _TBA_
