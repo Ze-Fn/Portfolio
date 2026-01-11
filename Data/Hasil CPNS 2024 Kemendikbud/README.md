@@ -19,7 +19,8 @@
 
 
 * __Results:__
-_TBA_
+    * There are **NO CORRELATION** between `GPA` on SKD, SKB, and Final Score; `Birthdate` on SKD, SKB, and Final Score; 
+    * _TBA_
 
 * __Implications:__
 _TBA_
