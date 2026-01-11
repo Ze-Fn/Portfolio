@@ -8,7 +8,7 @@
 | Technology | Primary Use | Status | Quick Link |
 |-----------|-------------|--------|-------------|
 | ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white) | Data extraction, cleaning, analysis, scripting | ![Pending](https://img.shields.io/badge/Status-Pending-lightgrey) | _TBA_ |
-| ![Google Sheets](https://img.shields.io/badge/Google%20Sheets-34A853?logo=googlesheets&logoColor=white) | Analysis and dashboard from MySQL data aggregation | ![In Progress](https://img.shields.io/badge/Status-In%20Progress-yellow) | _TBA_ |
+| ![Google Sheets](https://img.shields.io/badge/Google%20Sheets-34A853?logo=googlesheets&logoColor=white) | Statistical analysis and visualization | ![Done](https://img.shields.io/badge/Status-Done-brightgreen) | [🔎 View result](https://docs.google.com/spreadsheets/d/1D4j5DNi-wEyO_b0KeXNs210J5yzj0v4Tr6N-RAh1sGE/edit?usp=sharing) |
 | ![Microsoft Excel](https://img.shields.io/badge/Microsoft%20Excel-217346?logo=microsoftexcel&logoColor=white) | Analysis and dashboard from MySQL data aggregation | ![In Progress](https://img.shields.io/badge/Status-In%20Progress-yellow) | _TBA_ |
 | ![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white) | Data storage, transformation, SQL analytics | ![Done](https://img.shields.io/badge/Status-Done-brightgreen) | [⬇️ Download CSV](https://raw.githubusercontent.com/Ze-Fn/Portfolio/refs/heads/main/Data/Hasil%20CPNS%202024%20Kemendikbud/cleaned_v2.csv)
 | ![Jupyter Notebook](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white) | Exploratory data analysis and prototyping | ![Pending](https://img.shields.io/badge/Status-Pending-lightgrey) | _TBA_ |
