@@ -600,19 +600,17 @@ CREATE TABLE `loc_details` AS
 		GROUP BY loc_code, fix_institution, faculty, fix_dept
 	)
 
-	SELECT loc_code AS lc_code, fix_institution AS inst, faculty, fix_dept AS dept
+	SELECT DISTINCT loc_code AS lc_code, fix_institution AS inst	-- faculty and dept are excluded since they are problematic and require further cleaning
 	FROM uniq_uni
 	UNION
-	SELECT loc_code, institution, faculty, dept
+	SELECT DISTINCT loc_code, institution-- , faculty, dept
 	FROM politek
-	ORDER BY inst, faculty;
+	ORDER BY lc_code;
 
 CREATE TABLE `cleaned1` AS
-	SELECT lt.*, rt.inst, faculty, dept 
+	SELECT lt.*, rt.inst
 	FROM cleaned AS lt
 	LEFT JOIN loc_details AS rt
 		ON lt.loc_code = rt.lc_code
-	ORDER BY page_number;
+	ORDER BY page_number, relative_num;
 
-SELECT DISTINCT * FROM cleaned1;
-;
