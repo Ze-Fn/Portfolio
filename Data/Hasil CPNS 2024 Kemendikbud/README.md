@@ -7,15 +7,15 @@
 
 | Technology       | Primary Use                                                 | Status           |
 |------------------|-------------------------------------------------------------|------------------|
-| Python           | Data extraction, cleaning, analysis, scripting              | Pending ⏳       |
-| Google Sheets    | Analysis and dashboard from MySQL data aggregation          | In Progress 🟡   |
-| Microsoft Excel  | Analysis and dashboard from MySQL data aggregation          | In Progress 🟡   |
-| MySQL            | Data storage, transformation, SQL analytics                 | In Progress 🟡   |
-| Jupyter Notebook | Exploratory data analysis and prototyping                   | Pending ⏳       |
-| Tableau          | Data visualization and dashboarding                         | Pending ⏳       |
-| Power BI         | Business intelligence reporting                             | Pending ⏳       |
+| Python           | Data extraction, cleaning, analysis, scripting              | ⏳ Pending       |
+| Google Sheets    | Analysis and dashboard from MySQL data aggregation          | 🟡 In Progress   |
+| Microsoft Excel  | Analysis and dashboard from MySQL data aggregation          | 🟡 In Progress   |
+| MySQL            | Data storage, transformation, SQL analytics                 | 🟢 Done          |
+| Jupyter Notebook | Exploratory data analysis and prototyping                   | ⏳ Pending       |
+| Tableau          | Data visualization and dashboarding                         | ⏳ Pending       |
+| Power BI         | Business intelligence reporting                             | ⏳ Pending       |
 
-> **CURRENT PROGRESS:** Extracting missing values (loc_detail) using [extract_string.py]()
+> **CURRENT PROGRESS:** Univariate data analysis using `Python` in `Jupyter Notebook` and perhaps `Google Colab` as well.
 
 * __Results:__
 _TBA_
@@ -56,15 +56,19 @@ I downloaded the data officially from The Ministry of Education and Culture (now
 4. Rename all column to a more appropriate name.
 5. Define open positions with no candidate based on COUNT(page_number).
 6. Import rows from source PDF with different Python script that successfully extract the missing rows.
-    * Extract the PDF file using a different script ([extract_missing_rows.py]()).
+    * Extract the PDF file using a different script ([extract_missing_rows.py](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/extract_missing_rows.py)).
     * Save to CSV ([extracted_missing_rows.csv](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/extract_missing_rows.py)).
     * Clean the CSV using bash script ([omit_newlines1.sh](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/omit_newlines1.sh)) to eliminate inline `\n` in [missing_rows.csv](https://raw.githubusercontent.com/Ze-Fn/Portfolio/refs/heads/main/Data/Hasil%20CPNS%202024%20Kemendikbud/missing_rows.csv) _(which can cause massive mess in the import process)_ and replaces it with a blank spaces `" "`.
 7. Import the [missing_rows.csv](https://raw.githubusercontent.com/Ze-Fn/Portfolio/refs/heads/main/Data/Hasil%20CPNS%202024%20Kemendikbud/missing_rows.csv) to MySQL database under different table name.
----
+8. Extract the PDF once more to extract all data in a text format rather than table using [extract_string.py](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/extract_string.py). This is to extract the entire textual content of the PDF, aiming to extract the location details of each `loc_code`.
+9. The result of [extract_string.py](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/extract_string.py) can be found in [extracted_loc_details.csv](https://raw.githubusercontent.com/Ze-Fn/Portfolio/refs/heads/main/Data/Hasil%20CPNS%202024%20Kemendikbud/extracted_loc_details.csv), to which it is then cleaned using [extracted_loc_detailv1.py](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/extract_loc_detailv1.py) and resulted in a cleaned [extracted_loc_details1.csv](https://raw.githubusercontent.com/Ze-Fn/Portfolio/refs/heads/main/Data/Hasil%20CPNS%202024%20Kemendikbud/extracted_loc_details1.csv).
+10. Replace all unnecessary symbols like `|`, `..`, etc. in the [extracted_loc_details1.csv](https://raw.githubusercontent.com/Ze-Fn/Portfolio/refs/heads/main/Data/Hasil%20CPNS%202024%20Kemendikbud/extracted_loc_details1.csv) file using VS Code `Find & Replace`, as well as adding columns at line[1] of the csv.
+11. Add `Null` to the rows with values less than the number of available columns in the modified [extracted_loc_details1.csv](https://raw.githubusercontent.com/Ze-Fn/Portfolio/refs/heads/main/Data/Hasil%20CPNS%202024%20Kemendikbud/extracted_loc_details1.csv) file using [add_null.py](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/add_null.py).
+12. Import the resulting CSV file ([add_nulls_extd_loc_details1.csv](https://raw.githubusercontent.com/Ze-Fn/Portfolio/refs/heads/main/Data/Hasil%20CPNS%202024%20Kemendikbud/add_nulls_extd_loc_details1.csv)) from step 11 to MySQL for further data cleaning (see [loc_details.sql](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/loc_details.sql)).
 
-The [**cleaned script**](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/attempt1_cleanquery.sql).
-
-The [**dirty script**](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/MySQL/cleaning2_hasil_cpns2024_kemendikbud.sql), on the other hand, needs **no** further **adjustments**, but the script is **very ugly** that I don't recommend running it to query the data (you have been warned :D). It contains my learning journey that materializes my theoretical comprehension of SQL language.
+>The [**cleaned script**](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/attempt1_cleanquery.sql).
+>
+>The [**dirty script**](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/MySQL/cleaning2_hasil_cpns2024_kemendikbud.sql), on the other hand, needs **no** further **adjustments**, but the script is **very ugly** that I don't recommend running it to query the data (you have been warned :D). It contains my learning journey that materializes my theoretical comprehension of SQL language.
 
 Hereafter, I am using the cleaned version as my main data source.
 
@@ -74,7 +78,7 @@ Hereafter, I am using the cleaned version as my main data source.
     * Measure of Dispersion
     * Frequency Distribution
 
-    > Available in [SQL script](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/attempt1_cleanquery.sql), more to come ...
+    > Available in [SQL script](https://github.com/Ze-Fn/Portfolio/blob/main/Data/Hasil%20CPNS%202024%20Kemendikbud/univariate_analysis.sql), more to come ...
 
 2. Bivariate data analysis.
     * Pearson Correlation
